@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#convert").click(function() {
+                var btc = $("#btc").val();
+                $.ajax({
+                    url: "https://api.coindesk.com/v1/bpi/currentprice/BTC.json",
+                    success:function(data){
+                        var rate = JSON.parse(data).bpi.USD.rate_float;
+                        var usd = btc * rate;
+                        $("#result").text(btc + " bitcoin equals " + usd + "USD")
+                    }
+                });
+            });
+        });    
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Bitcoin to USD Converter</h1>
+    <p>Enter The Number of Bitcoin :</p>
+    <input type="number" id="btc" min="0">
+    <button id="convert">Convert</button>
+    <p id="result"></p>
+    <srcipt src="converter.js"></srcipt>
+    
+</body>
+</html>
